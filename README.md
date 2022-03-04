@@ -17,7 +17,12 @@ Cycle is played according to the following rules.
 
 ## Project structure
 ```
-<!-- TO-DO: add project structure here -->
+root                    (project root folder)
++-- cycle               (source code for game)
+  +-- game              (specific game classes)
+  +-- __main__.py       (start game)
+  +-- constants.py      (configuration of the game)
++-- README.md           (general info)
 ```
 
 ## Required software
