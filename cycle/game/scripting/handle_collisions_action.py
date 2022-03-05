@@ -53,14 +53,41 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        snake = cast.get_first_actor("snakes")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
+        # Get snakes list
+        snakes = cast.get_actors('snakes')
+
+        # Assign the 2 snakes to variables
+        snake1 = snakes[0]
+        snake2 = snakes[1]
+
+        # Get their heads
+        snake1_head = snake1.get_segments()[0]
+        snake2_head = snake2.get_segments()[0]
+
+        # Get their segments
+        snake1_segments = snake1.get_segments()[1:]
+        snake2_segments = snake2.get_segments()[1:]
         
-        for segment in segments:
-            if head.get_position().equals(segment.get_position()):
+        # Check for collision with itself, snake 1
+        for segment in snake1_segments:
+            if snake1_head.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+            # Collision with the opponent 
+            for segment2 in snake2_segments:
+                if snake1_head.get_position().equals(segment2.get_position()):
+                    self._is_game_over = True
+
+        # Check for collision with itself, snake 2
+        for segment in snake2_segments:
+            if snake2_head.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+            # Collision with the opponent 
+            for segment1 in snake1_segments:
+                if snake2_head.get_position().equals(segment1.get_position()):
+                    self._is_game_over = True
+                
         
+
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
         
@@ -68,9 +95,12 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
-            snake = cast.get_first_actor("snakes")
-            segments = snake.get_segments()
-            food = cast.get_first_actor("foods")
+            # Get snakes list
+            snakes = cast.get_actors("snakes")
+
+            # Get their segments
+            snake1_segments = snakes[0].get_segments()
+            snake2_segments = snakes[1].get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -81,6 +111,10 @@ class HandleCollisionsAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in segments:
+            # Snake 1
+            for segment in snake1_segments:
                 segment.set_color(constants.WHITE)
-            food.set_color(constants.WHITE)
+                
+            # Snake 2
+            for segment in snake2_segments:
+                segment.set_color(constants.WHITE)
