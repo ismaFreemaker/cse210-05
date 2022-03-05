@@ -56,11 +56,11 @@ class ControlActorsAction(Action):
             self._direction[1] = Point(constants.CELL_SIZE, 0)
         
         # up
-        if self._keyboard_service.is_key_down('k'):
+        if self._keyboard_service.is_key_down('i'):
             self._direction[1] = Point(0, -constants.CELL_SIZE)
         
         # down
-        if self._keyboard_service.is_key_down('i'):
+        if self._keyboard_service.is_key_down('k'):
             self._direction[1] = Point(0, constants.CELL_SIZE)
         
         snakes = cast.get_actors("snakes")
