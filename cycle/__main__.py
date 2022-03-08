@@ -25,8 +25,8 @@ def main():
     cast.add_actor("snakes", Snake(constants.RED, 0, 300))
     cast.add_actor("snakes", Snake(constants.GREEN, 450, 300))
 
-    cast.add_actor("scores", Score(constants.RED,0,50))
-    cast.add_actor("scores", Score(constants.GREEN,450,50))
+    cast.add_actor("scores", Score('Player one', 'W, A, S, D', constants.RED))
+    cast.add_actor("scores", Score('Player two', 'I, J, K, L', constants.GREEN))
     
     # start the game
     keyboard_service = KeyboardService()
