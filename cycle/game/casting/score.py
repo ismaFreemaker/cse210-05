@@ -11,7 +11,7 @@ class Score(Actor):
     Attributes:
         _points (int): The points earned in the game.
     """
-    def __init__(self, text, controls, color):
+    def __init__(self):
         super().__init__()
 
     def set_controls(self, controls):
@@ -20,5 +20,5 @@ class Score(Actor):
         Args:
             points (int): The points to add.
         """
-        text = self.get_text
+        text = self.get_text()
         self.set_text(f"{text} {controls}")

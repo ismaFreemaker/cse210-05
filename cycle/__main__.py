@@ -23,8 +23,20 @@ def main():
     cast.add_actor("snakes", Snake(constants.RED, 0, 300))
     cast.add_actor("snakes", Snake(constants.GREEN, 450, 300))
 
-    cast.add_actor("scores", Score('Player one', 'W, A, S, D', constants.RED))
-    cast.add_actor("scores", Score('Player two', 'I, J, K, L', constants.GREEN))
+    cast.add_actor("scores", Score())
+    cast.add_actor("scores", Score())
+
+    scores = cast.get_actors('scores')
+    # Player one
+    scores[0].set_text('Player one:')
+    scores[0].set_controls('W, A, S, D')
+    scores[0].set_color(constants.RED)
+    scores[0].set_position(Point(15, 0))
+    # Player two
+    scores[1].set_text('Player two:')
+    scores[1].set_controls('I, J, K, L')
+    scores[1].set_color(constants.GREEN)
+    scores[1].set_position(Point(730, 0))
     
     # start the game
     keyboard_service = KeyboardService()
