@@ -17,6 +17,7 @@ class Snake(Actor):
         super().__init__()
         self._segments = []
         self._prepare_body(color, position_x, position_y)
+        self._color = color
 
     def get_segments(self):
         return self._segments
@@ -46,7 +47,7 @@ class Snake(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
+            segment.set_color(self._color)
             self._segments.append(segment)
 
     def turn_head(self, velocity):

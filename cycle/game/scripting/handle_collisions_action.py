@@ -28,7 +28,9 @@ class HandleCollisionsAction(Action):
         """
         if not self._is_game_over:
             self._handle_segment_collision(cast)
-            self._handle_game_over(cast)
+            self._handle_game_over(cast, False)
+        else:
+            self._handle_game_over(cast, True)
 
     
     def _handle_segment_collision(self, cast):
@@ -77,7 +79,7 @@ class HandleCollisionsAction(Action):
                 
         
 
-    def _handle_game_over(self, cast):
+    def _handle_game_over(self, cast, already_over):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
         
         Args:
@@ -97,16 +99,6 @@ class HandleCollisionsAction(Action):
 
             message = Actor()
 
-            # Set different colors for the final message 
-            if self._winner == 'Player one':
-                message.set_color(constants.RED)
-            else: 
-                message.set_color(constants.GREEN)
-
-            message.set_text(f"Game Over! {self._winner} won!")
-            message.set_position(position)
-            cast.add_actor("messages", message)
-
             # Snake 1
             for segment in snake1_segments:
                 segment.set_color(constants.WHITE)
@@ -114,3 +106,14 @@ class HandleCollisionsAction(Action):
             # Snake 2
             for segment in snake2_segments:
                 segment.set_color(constants.WHITE)
+            
+            if not already_over:
+                # Set different colors for the final message 
+                if self._winner == 'Player one':
+                    message.set_color(constants.RED)
+                else: 
+                    message.set_color(constants.GREEN)
+
+                message.set_text(f"Game Over! {self._winner} won!")
+                message.set_position(position)
+                cast.add_actor("messages", message)

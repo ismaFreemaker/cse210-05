@@ -45,9 +45,9 @@ def main():
 
     script = Script()
     script.add_action("input", ControlActorsAction(keyboard_service))
+    script.add_action("update", Grow_Snakes())
     script.add_action("update", MoveActorsAction())
     script.add_action("update", HandleCollisionsAction())
-    script.add_action("update", Grow_Snakes())  #<--  this would be the next class related with polymorphism (changing the execute)
     script.add_action("output", DrawActorsAction(video_service))
     
     director = Director(video_service)
