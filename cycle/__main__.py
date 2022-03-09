@@ -1,5 +1,6 @@
 import constants
 
+from game.scripting.grow_snakes import Grow_Snakes
 from game.casting.cast import Cast
 from game.casting.score import Score
 from game.casting.snake import Snake
@@ -46,7 +47,7 @@ def main():
     script.add_action("input", ControlActorsAction(keyboard_service))
     script.add_action("update", MoveActorsAction())
     script.add_action("update", HandleCollisionsAction())
-    # script.add_action("update", GrowSnakes())  <--  this would be the next class related with polymorphism (changing the execute)
+    script.add_action("update", Grow_Snakes())  #<--  this would be the next class related with polymorphism (changing the execute)
     script.add_action("output", DrawActorsAction(video_service))
     
     director = Director(video_service)
